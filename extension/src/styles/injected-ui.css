@@ -12,26 +12,56 @@
 }
 
 .ctp-btn {
-  width: 24px;
-  height: 24px;
+  width: 19.6px;
+  height: 19.6px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-weight: 700;
-  line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.ctp-btn svg {
+  width: 11.2px;
+  height: 11.2px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  pointer-events: none;
+}
+
+.ctp-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.ctp-btn:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
 }
 
 .ctp-btn-plus {
-  background: #16a34a;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
   color: #fff;
 }
 
+.ctp-btn-plus svg {
+  width: 15px;
+  height: 15px;
+}
+
 .ctp-btn-info {
-  background: #2563eb;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: #fff;
+}
+
+.ctp-btn-info svg {
+  width: 15px;
+  height: 15px;
 }
 
 .ctp-btn-error {

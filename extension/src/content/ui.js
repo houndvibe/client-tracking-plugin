@@ -2,6 +2,16 @@
   const ROOT_ATTR = "data-client-tracker-root";
   const MODAL_ATTR = "data-client-tracker-editor";
   const TOOLTIP_ATTR = "data-client-tracker-tooltip";
+  const ICON_PLUS = `
+    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <path d="M10 4.25v11.5M4.25 10h11.5" />
+    </svg>
+  `;
+  const ICON_INFO = `
+    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <path d="M10 13.75V9.5M10 6.5h.01M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
+    </svg>
+  `;
 
   function ensureAnchorElement(nicknameElement) {
     let anchor = nicknameElement.parentElement.querySelector(`[${ROOT_ATTR}]`);
@@ -43,7 +53,8 @@
     btn.type = "button";
     btn.className = "ctp-btn ctp-btn-plus";
     btn.title = "Клиент не найден. Добавить запись.";
-    btn.textContent = "+";
+    btn.setAttribute("aria-label", "Добавить клиента");
+    btn.innerHTML = ICON_PLUS;
     btn.addEventListener("click", onClick);
     anchor.appendChild(btn);
   }
@@ -56,7 +67,8 @@
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "ctp-btn ctp-btn-info";
-    btn.textContent = "i";
+    btn.setAttribute("aria-label", "Открыть карточку клиента");
+    btn.innerHTML = ICON_INFO;
     btn.title = "Клиент найден. Нажмите для редактирования.";
     btn.addEventListener("click", options.onClick);
 
@@ -93,19 +105,12 @@
     const controls = document.createElement("div");
     controls.className = "ctp-modal-controls";
 
-    const btnMin = document.createElement("button");
-    btnMin.type = "button";
-    btnMin.className = "ctp-control-btn";
-    btnMin.textContent = "_";
-    btnMin.title = "Свернуть/развернуть";
-
     const btnClose = document.createElement("button");
     btnClose.type = "button";
     btnClose.className = "ctp-control-btn";
     btnClose.textContent = "x";
     btnClose.title = "Закрыть";
 
-    controls.appendChild(btnMin);
     controls.appendChild(btnClose);
     header.appendChild(controls);
 
@@ -145,13 +150,6 @@
       if (event.target === overlay) {
         overlay.remove();
       }
-    });
-
-    let isCollapsed = false;
-    btnMin.addEventListener("click", () => {
-      isCollapsed = !isCollapsed;
-      body.style.display = isCollapsed ? "none" : "block";
-      overlay.style.opacity = isCollapsed ? "0.65" : "1";
     });
 
     saveBtn.addEventListener("click", async () => {

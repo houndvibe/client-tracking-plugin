@@ -44,6 +44,60 @@ h1 {
   font-size: 14px;
 }
 
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 44px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #475569;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 1px;
+}
+
+.eye-icon {
+  display: inline-flex;
+}
+
+.eye-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.password-toggle[aria-pressed="false"] .eye-open,
+.password-toggle[aria-pressed="true"] .eye-closed {
+  display: none;
+}
+
 .checkbox {
   display: flex;
   gap: 8px;
@@ -69,6 +123,25 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background: #1d4ed8;
+}
+
+.actions .secondary {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #0f172a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.actions .secondary:hover {
+  background: #f8fafc;
+}
+
+.actions .secondary:disabled,
+button[type="submit"]:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 .status {

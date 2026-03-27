@@ -2,9 +2,9 @@
   const DEFAULT_SETTINGS = {
     apiUrl: "https://oybluliumjrhyizmuuyd.supabase.co",
     apiKey: "",
-    targetDomain: "",
-    modalSelector: "",
-    nicknameSelector: "",
+    targetDomain: "localhost",
+    modalSelector: ".sandbox-client-modal",
+    nicknameSelector: ".sandbox-nickname",
     debug: false
   };
 

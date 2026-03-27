@@ -5,97 +5,274 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Client Tracking Sandbox</title>
     <style>
+      :root {
+        --bg: #f3f6ff;
+        --card: #ffffff;
+        --text: #12203a;
+        --muted: #53627d;
+        --line: #d9e1f2;
+        --primary: #315efb;
+        --primary-hover: #244ae3;
+        --success: #0ea86e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f3f4f6;
-        color: #111827;
+        font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+        background: radial-gradient(circle at top right, #dce8ff 0, var(--bg) 45%);
+        color: var(--text);
       }
+
       .page {
-        max-width: 900px;
-        margin: 32px auto;
-        padding: 0 16px;
+        max-width: 1080px;
+        margin: 28px auto;
+        padding: 0 16px 24px;
       }
+
+      .hero {
+        background: linear-gradient(135deg, #1e3a8a 0%, #315efb 70%);
+        color: #ffffff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+      }
+
+      .hero h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+
+      .hero p {
+        margin: 0;
+        opacity: 0.94;
+      }
+
+      .layout {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
       .panel {
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: 0 10px 25px rgba(29, 41, 57, 0.08);
         padding: 18px;
       }
+
+      .panel h2 {
+        margin: 0 0 12px;
+        font-size: 20px;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
       .toolbar {
+        margin: 16px 0;
         display: flex;
-        gap: 10px;
         flex-wrap: wrap;
-        margin-bottom: 14px;
+        gap: 10px;
       }
-      .toolbar button {
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        background: #fff;
-        padding: 8px 10px;
+
+      .btn {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #ffffff;
+        color: var(--text);
+        padding: 9px 12px;
         cursor: pointer;
+        font-size: 14px;
+        transition: 0.18s ease;
       }
+
+      .btn:hover {
+        border-color: #b8c6e6;
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #ffffff;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-hover);
+        border-color: var(--primary-hover);
+      }
+
+      .selector-box {
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        padding: 10px;
+        background: #f8faff;
+      }
+
+      .selector-box code {
+        display: inline-block;
+        margin-top: 4px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        background: #eaf0ff;
+        font-size: 13px;
+      }
+
+      .status-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .badge-ok {
+        background: #dbf8ec;
+        color: #076b47;
+      }
+
+      .log {
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px;
+        min-height: 110px;
+        background: #fbfcff;
+        font-size: 13px;
+        color: #2f3d58;
+      }
+
+      .log p {
+        margin: 0 0 6px;
+      }
+
+      .test-plan {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .test-plan li {
+        margin-bottom: 12px;
+        line-height: 1.4;
+      }
+
+      .test-plan strong {
+        color: #0f2b76;
+      }
+
       .overlay {
         position: fixed;
         inset: 0;
-        background: rgba(15, 23, 42, 0.35);
+        background: rgba(15, 23, 42, 0.44);
         display: none;
         align-items: center;
         justify-content: center;
+        padding: 12px;
       }
+
       .overlay.open {
         display: flex;
       }
+
       .sandbox-client-modal {
-        width: min(520px, calc(100vw - 20px));
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.2);
-        padding: 16px;
+        width: min(560px, calc(100vw - 24px));
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+        padding: 18px;
       }
+
       .row {
         margin-bottom: 12px;
       }
+
       .sandbox-nickname {
         font-weight: 700;
-        font-size: 18px;
+        font-size: 19px;
+        color: #111827;
       }
-      .hint {
-        color: #4b5563;
-        font-size: 14px;
+
+      .close-modal {
+        float: right;
+        font-size: 13px;
+      }
+
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
     <div class="page">
-      <div class="panel">
+      <section class="hero">
         <h1>Sandbox для проверки расширения</h1>
-        <p class="hint">
-          Используйте этот файл для теста `MutationObserver` и UI-инъекции.
+        <p>
+          Отдельная тестовая страница для проверки `MutationObserver`, поиска
+          никнейма и UI-инъекции в модалку клиента.
         </p>
-        <div class="toolbar">
-          <button id="openModal">Открыть карточку клиента</button>
-          <button id="closeModal">Закрыть карточку</button>
-          <button id="nicknameKnown">Поставить ник: known_user</button>
-          <button id="nicknameNew">Поставить ник: new_user_123</button>
-          <button id="nicknameRandom">Случайный ник</button>
+      </section>
+
+      <section class="layout">
+        <div class="panel">
+          <h2>Управление тестовой карточкой</h2>
+
+          <div class="toolbar">
+            <button id="openModal" class="btn btn-primary">Открыть карточку</button>
+            <button id="nicknameKnown" class="btn">Ник: known_user</button>
+            <button id="nicknameNew" class="btn">Ник: new_user_123</button>
+            <button id="nicknameRandom" class="btn">Случайный ник</button>
+          </div>
+
+          <div class="selector-box">
+            <div class="hint">
+              Селекторы, которые нужно указать в настройках расширения:
+            </div>
+            <div>
+              <code>modalSelector: .sandbox-client-modal</code><br />
+              <code>nicknameSelector: .sandbox-nickname</code>
+            </div>
+          </div>
+
+          <div class="status-row">
+            <span class="badge badge-ok">Ready for Extension Test</span>
+            <span class="hint" id="currentNicknameLabel"
+              >Текущий никнейм: known_user</span
+            >
+          </div>
+
+          <div class="log" id="actionLog"></div>
         </div>
-        <p class="hint">
-          Рекомендуемые селекторы для options: modalSelector =
-          <code>.sandbox-client-modal</code>, nicknameSelector =
-          <code>.sandbox-nickname</code>.
-        </p>
-      </div>
+
+      </section>
     </div>
 
     <div class="overlay" id="overlay">
       <div class="sandbox-client-modal">
-        <div class="row">Карточка клиента CRM (тест)</div>
+        <button id="closeModalInner" class="btn close-modal">Закрыть</button>
+        <div class="row"><strong>Карточка клиента CRM (тест)</strong></div>
         <div class="row">
           Никнейм: <span class="sandbox-nickname" id="nickname">known_user</span>
         </div>
         <div class="row hint">
-          Здесь расширение должно внедрить кнопку `+` или иконку `i` рядом с ником.
+          Здесь расширение должно встроить кнопку или иконку рядом с ником.
         </div>
       </div>
     </div>
@@ -104,25 +281,66 @@
       (function () {
         const overlay = document.getElementById("overlay");
         const nickname = document.getElementById("nickname");
+        const actionLog = document.getElementById("actionLog");
+        const currentNicknameLabel = document.getElementById("currentNicknameLabel");
 
-        document.getElementById("openModal").addEventListener("click", () => {
+        function log(message) {
+          const entry = document.createElement("p");
+          entry.textContent = `[${new Date().toLocaleTimeString("ru-RU")}] ${message}`;
+          actionLog.prepend(entry);
+
+          if (actionLog.childElementCount > 8) {
+            actionLog.removeChild(actionLog.lastElementChild);
+          }
+        }
+
+        function openModal() {
           overlay.classList.add("open");
-        });
-        document.getElementById("closeModal").addEventListener("click", () => {
+          log("Открыта карточка клиента.");
+        }
+
+        function closeModal() {
           overlay.classList.remove("open");
-        });
+          log("Карточка клиента закрыта.");
+        }
+
+        function setNickname(value) {
+          nickname.textContent = value;
+          currentNicknameLabel.textContent = `Текущий никнейм: ${value}`;
+          openModal();
+          log(`Установлен никнейм: ${value}`);
+        }
+
+        document.getElementById("openModal").addEventListener("click", openModal);
+        document
+          .getElementById("closeModalInner")
+          .addEventListener("click", closeModal);
+
         document.getElementById("nicknameKnown").addEventListener("click", () => {
-          nickname.textContent = "known_user";
-          overlay.classList.add("open");
+          setNickname("known_user");
         });
+
         document.getElementById("nicknameNew").addEventListener("click", () => {
-          nickname.textContent = "new_user_123";
-          overlay.classList.add("open");
+          setNickname("new_user_123");
         });
+
         document.getElementById("nicknameRandom").addEventListener("click", () => {
-          nickname.textContent = `user_${Math.floor(Math.random() * 9999)}`;
-          overlay.classList.add("open");
+          setNickname(`user_${Math.floor(Math.random() * 9999)}`);
         });
+
+        overlay.addEventListener("click", (event) => {
+          if (event.target === overlay) {
+            closeModal();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeModal();
+          }
+        });
+
+        log("Sandbox готов к тестированию расширения.");
       })();
     </script>
   </body>
