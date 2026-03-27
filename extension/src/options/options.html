@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Client Tracking Plugin - Настройки</title>
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Настройки Client Tracking Plugin</h1>
+      <p class="description">
+        Укажите параметры подключения к Supabase и селекторы DOM целевого сайта.
+      </p>
+
+      <form id="settingsForm">
+        <label class="field">
+          <span>API URL</span>
+          <input id="apiUrl" type="url" required placeholder="https://project-ref.supabase.co" />
+        </label>
+
+        <label class="field">
+          <span>API Key (publishable/anon)</span>
+          <input id="apiKey" type="password" required />
+        </label>
+
+        <label class="field">
+          <span>Целевой домен</span>
+          <input id="targetDomain" type="text" required placeholder="example.com" />
+        </label>
+
+        <label class="field">
+          <span>Селектор модального окна</span>
+          <input id="modalSelector" type="text" required placeholder=".client-modal" />
+        </label>
+
+        <label class="field">
+          <span>Селектор никнейма внутри модалки</span>
+          <input id="nicknameSelector" type="text" required placeholder=".client-nickname" />
+        </label>
+
+        <label class="checkbox">
+          <input id="debug" type="checkbox" />
+          <span>Включить debug-режим (минимальные логи без секретов)</span>
+        </label>
+
+        <div class="actions">
+          <button type="submit">Сохранить</button>
+          <span id="status" class="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </main>
+
+    <script src="../state/storage.js"></script>
+    <script src="./options.js"></script>
+  </body>
+</html>

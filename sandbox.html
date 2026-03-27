@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Client Tracking Sandbox</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f3f4f6;
+        color: #111827;
+      }
+      .page {
+        max-width: 900px;
+        margin: 32px auto;
+        padding: 0 16px;
+      }
+      .panel {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        padding: 18px;
+      }
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .toolbar button {
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: #fff;
+        padding: 8px 10px;
+        cursor: pointer;
+      }
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.35);
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .overlay.open {
+        display: flex;
+      }
+      .sandbox-client-modal {
+        width: min(520px, calc(100vw - 20px));
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.2);
+        padding: 16px;
+      }
+      .row {
+        margin-bottom: 12px;
+      }
+      .sandbox-nickname {
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .hint {
+        color: #4b5563;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="panel">
+        <h1>Sandbox для проверки расширения</h1>
+        <p class="hint">
+          Используйте этот файл для теста `MutationObserver` и UI-инъекции.
+        </p>
+        <div class="toolbar">
+          <button id="openModal">Открыть карточку клиента</button>
+          <button id="closeModal">Закрыть карточку</button>
+          <button id="nicknameKnown">Поставить ник: known_user</button>
+          <button id="nicknameNew">Поставить ник: new_user_123</button>
+          <button id="nicknameRandom">Случайный ник</button>
+        </div>
+        <p class="hint">
+          Рекомендуемые селекторы для options: modalSelector =
+          <code>.sandbox-client-modal</code>, nicknameSelector =
+          <code>.sandbox-nickname</code>.
+        </p>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="sandbox-client-modal">
+        <div class="row">Карточка клиента CRM (тест)</div>
+        <div class="row">
+          Никнейм: <span class="sandbox-nickname" id="nickname">known_user</span>
+        </div>
+        <div class="row hint">
+          Здесь расширение должно внедрить кнопку `+` или иконку `i` рядом с ником.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const overlay = document.getElementById("overlay");
+        const nickname = document.getElementById("nickname");
+
+        document.getElementById("openModal").addEventListener("click", () => {
+          overlay.classList.add("open");
+        });
+        document.getElementById("closeModal").addEventListener("click", () => {
+          overlay.classList.remove("open");
+        });
+        document.getElementById("nicknameKnown").addEventListener("click", () => {
+          nickname.textContent = "known_user";
+          overlay.classList.add("open");
+        });
+        document.getElementById("nicknameNew").addEventListener("click", () => {
+          nickname.textContent = "new_user_123";
+          overlay.classList.add("open");
+        });
+        document.getElementById("nicknameRandom").addEventListener("click", () => {
+          nickname.textContent = `user_${Math.floor(Math.random() * 9999)}`;
+          overlay.classList.add("open");
+        });
+      })();
+    </script>
+  </body>
+</html>
