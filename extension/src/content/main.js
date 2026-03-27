@@ -6,10 +6,10 @@
     if (!raw) return true;
     if (raw.startsWith("sb_secret_")) return true;
 
-    // Legacy service_role is a JWT key where payload contains role=service_role.
+    // Для JWT-ключей допускаем только роль anon.
     if (raw.split(".").length === 3) {
       const payload = decodeJwtPayload(raw);
-      if (payload && payload.role === "service_role") return true;
+      if (!payload || payload.role !== "anon") return true;
     }
     return false;
   }

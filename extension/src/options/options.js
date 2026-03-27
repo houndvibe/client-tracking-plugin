@@ -36,9 +36,9 @@
     if (value.split(".").length === 3) {
       try {
         const payload = JSON.parse(atob(value.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
-        return payload && payload.role === "service_role";
+        return !payload || payload.role !== "anon";
       } catch (_error) {
-        return false;
+        return true;
       }
     }
 
@@ -163,9 +163,7 @@
 
     let roleLabel = "publishable/anon";
     const payload = parseJwtPayload(apiKey);
-    if (payload && payload.role === "authenticated") {
-      roleLabel = "authenticated";
-    } else if (payload && payload.role === "anon") {
+    if (payload && payload.role === "anon") {
       roleLabel = "anon";
     }
 
