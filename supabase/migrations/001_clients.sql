@@ -28,7 +28,6 @@ for each row execute function public.set_updated_at();
 alter table public.clients enable row level security;
 
 -- Пример базовых политик для браузерного доступа через anon/publishable key.
--- При необходимости ограничьте доступ дополнительными условиями.
 drop policy if exists clients_select_anon on public.clients;
 create policy clients_select_anon
 on public.clients
