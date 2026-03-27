@@ -44,14 +44,20 @@
   outline-offset: 2px;
 }
 
+.ctp-btn-plus,
+.ctp-btn-info {
+  width: 25px;
+  height: 25px;
+}
+
 .ctp-btn-plus {
   background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
   color: #fff;
 }
 
 .ctp-btn-plus svg {
-  width: 15px;
-  height: 15px;
+  width: 22.5px;
+  height: 22.5px;
 }
 
 .ctp-btn-info {
@@ -60,8 +66,8 @@
 }
 
 .ctp-btn-info svg {
-  width: 15px;
-  height: 15px;
+  width: 22.5px;
+  height: 22.5px;
 }
 
 .ctp-btn-error {
@@ -76,7 +82,7 @@
 
 .ctp-tooltip {
   position: absolute;
-  left: 30px;
+  left: 38px;
   top: -4px;
   min-width: 220px;
   max-width: 360px;

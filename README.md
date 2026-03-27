@@ -11,7 +11,6 @@
 ## Структура проекта
 
 ```text
-extension/
   manifest.json
   src/
     api/supabase-rest.js
