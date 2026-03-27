@@ -49,17 +49,17 @@ sandbox.html
 ## 2) Установка расширения в Chrome (Developer Mode)
 
 1. Откройте `chrome://extensions`.
-2. Включите **Developer mode**.
-3. Нажмите **Load unpacked**.
+2. Включите **Режим разработчика**(справа сверху).
+3. Нажмите **Загрузить распакованное расширение**.
 4. Выберите папку:
-   - `client-tracking-plugin\extension`
+   - `client-tracking-plugin`
 
 ## 3) Настройка расширения (Options page)
 
 Откройте настройки расширения и заполните поля:
 
-- `API URL`: API URL Supabase DB
-- `API Key`: publishable/anon key вашего проекта
+- `API URL`: API URL Supabase DB (....supabase.co)
+- `API Key`: publishable/anon key вашего проекта (sb_publishable_...)
 - `Целевой домен`: домен сайта заказчика, например `crm.example.com`
 - `Селектор модального окна`: например `.client-modal`
 - `Селектор никнейма`: например `.client-modal .nickname`
