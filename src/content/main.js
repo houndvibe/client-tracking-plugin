@@ -33,7 +33,8 @@
 
   async function bootstrap() {
     const settings = await window.ClientTrackerStorage.getSettings();
-    if (!hostnameMatches(location.hostname, settings.targetDomain)) {
+    const isFileProtocol = location.protocol === "file:";
+    if (!isFileProtocol && !hostnameMatches(location.hostname, settings.targetDomain)) {
       return;
     }
     if (!settings.modalSelector || !settings.nicknameSelector) {

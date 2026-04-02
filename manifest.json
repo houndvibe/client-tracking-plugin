@@ -5,13 +5,14 @@
   "version": "1.0.0",
   "permissions": ["storage"],
   "host_permissions": [
+    "file://*/*",
     "http://*/*",
     "https://*/*"
   ],
   "options_page": "src/options/options.html",
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*"],
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
       "css": ["src/styles/injected-ui.css"],
       "js": [
         "src/state/storage.js",
