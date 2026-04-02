@@ -27,26 +27,7 @@ supabase/migrations/001_clients.sql
 sandbox.html
 ```
 
-## 1) Настройка базы данных Supabase
-
-В проекте есть SQL миграция:
-
-- `supabase/migrations/001_clients.sql`
-
-Она создает:
-
-- таблицу `public.clients` (`nickname`, `deal_count`, `comment`, `created_at`, `updated_at`)
-- уникальность `nickname`
-- триггер автообновления `updated_at`
-- RLS + базовые политики для роли `anon` (select/insert/update)
-
-### Как применить SQL
-
-1. Откройте Supabase Dashboard вашего проекта.
-2. Перейдите в SQL Editor.
-3. Выполните SQL из файла `supabase/migrations/001_clients.sql`.
-
-## 2) Установка расширения в Chrome (Developer Mode)
+## 1) Установка расширения в Chrome (Developer Mode)
 
 1. Откройте `chrome://extensions`.
 2. Включите **Режим разработчика**(справа сверху).
@@ -54,7 +35,7 @@ sandbox.html
 4. Выберите папку:
    - `client-tracking-plugin`
 
-## 3) Настройка расширения (Options page)
+## 2) Настройка расширения (Options page)
 
 Откройте настройки расширения и заполните поля:
 
@@ -65,7 +46,7 @@ sandbox.html
 - `Селектор никнейма`: например `.client-modal .nickname`
 
 
-## 4) Тестирование на sandbox
+## 3) Тестирование на sandbox
 
 Добавлен файл:
 
@@ -96,7 +77,7 @@ sandbox.html
 3. Обновите расширение (кнопка Reload).
 4. Откройте `sandbox.html` напрямую (double-click).
 
-## 5) Логика работы
+## 4) Логика работы
 
 1. Content script запускается на странице.
 2. Проверяет домен по `targetDomain` из `chrome.storage.local`.
@@ -111,7 +92,7 @@ sandbox.html
    - POST (создание) или PATCH (обновление)
    - затем refetch и обновление состояния UI без перезагрузки страницы
 
-## 6) Что хранится локально
+## 5) Что хранится локально
 
 В `chrome.storage.local`:
 
@@ -123,4 +104,23 @@ sandbox.html
 - `debug`
 
 Секреты не логируются в консоль расширения.
+
+##6) Настройка базы данных Supabase (если нужно)
+
+В проекте есть SQL миграция:
+
+- `supabase/migrations/001_clients.sql`
+
+Она создает:
+
+- таблицу `public.clients` (`nickname`, `deal_count`, `comment`, `created_at`, `updated_at`)
+- уникальность `nickname`
+- триггер автообновления `updated_at`
+- RLS + базовые политики для роли `anon` (select/insert/update)
+
+### Как применить SQL
+
+1. Откройте Supabase Dashboard вашего проекта.
+2. Перейдите в SQL Editor.
+3. Выполните SQL из файла `supabase/migrations/001_clients.sql`.
 
